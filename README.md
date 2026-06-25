@@ -8,7 +8,6 @@
 ---
 
 ## 硬體架構圖 (Block Diagram)
-
 ```mermaid
 flowchart LR
     %% 全域訊號
