@@ -42,7 +42,7 @@
 
 ## 4. 測試平台與模擬行為流程 (Testbench & Simulation Flow)
 
-為驗證硬體邏輯的正確性，測試平台（`tb_dual_counter.vhd`）規劃了完整的生命週期驗證流程。下圖為該行為在時間軸上的運作節點（Activity-on-Node, AoV）：
+為驗證硬體邏輯的正確性，測試平台（`tb_dual_counter.vhd`）規劃了完整的生命週期驗證流程。下圖為該行為在時間軸上的運作節點（Activity-on-Vertex, AoV）：
 
 ![Project 2 模擬流程 AoV 圖](./Project2_diagram/AOV.drawio.png)
 
@@ -65,14 +65,13 @@
 | :--- | :--- | :--- |
 | **延遲模型** | **零延遲 (Zero Delay)**<br>訊號變化與時脈正緣完全同步。 | **真實延遲 (Realistic Delay)**<br>包含邏輯閘延遲（Gate Delay）與連線延遲（Routing Delay）。 |
 | **訊號觸發** | 當 `clk` 升起時，輸出值（`out_A`, `out_B`）在同一時間點瞬間完成切換（如 140.000ns）。 | 當 `clk` 升起後，輸出值需要經過一段傳播時間（Propagation Delay）才會完成轉變。 |
-| **初始不確定態** | 模擬剛開始時，所有暫存器直接進入乾淨的初始值。 | 在重置訊號（`rst`）尚未穩定傳播、硬體尚未就緒前，輸出端會短暫出現**紅色不可知狀態（X 態）**。 |
+| **初始不確定態** | 模擬剛開始時，所有暫存器直接進入乾淨的初始值。 | 在重置訊號（`rst`）尚未穩定傳播、硬體尚未就緒前，輸出端會短暫出現**紅色未知狀態（X 態）**。 |
 
 ### 真實硬體延遲觀測點
 
 在繞線後的時序波形圖中（例如游標鎖定的 **264.600ns** 時間點）：
 
-1. **傳播延遲顯現**：當前級時脈正緣（Rising Edge）升起後，輸出訊號 `out_A` 與 `out_B` 並非瞬間改變，而是存在微小的時間差（$T_{co}$，Clock-to-Output Delay）。這是因為訊號必須通過 FPGA 內部的查找表（LUT）與實際的金屬走線（Routing Net）。
-2. **硬體穩健性驗證**：儘管動態配置的上下限比較邏輯較為複雜，但在 100MHz (10ns) 的時脈週期下，所有的資料建立時間（Setup Time）與保持時間（Hold Time）均未發生違規（Timing Violation），輸出波形無毛邊（Glitch），證明實體電路繞線後具備極高的穩定度。
+**傳播延遲顯現**：當前級時脈正緣（Rising Edge）升起後，輸出訊號 `out_A` 與 `out_B` 並非瞬間改變，而是存在微小的時間差（$T_{co}$，Clock-to-Output Delay）。這是因為訊號必須通過 FPGA 內部的查找表（LUT）與實際的金屬走線（Routing Net）。
 
 ---
 
