@@ -7,48 +7,8 @@
 
 ---
 
-## 硬體架構圖 (Block Diagram)
-```mermaid
-flowchart LR
-    %% 全域訊號
-    clk([外部時脈 clk])
-    rst([外部重置 rst])
-
-    subgraph dual_counter_top [頂層連接模組: dual_counter_top]
-        %% Counter A
-        subgraph Counter_A [Counter_Instance_A]
-            direction TB
-            CA_logic[configurable_counter 核心邏輯<br/>- 獨立 A 區間運算<br/>- 獨立 A 方向切換]
-        end
-
-        %% Counter B
-        subgraph Counter_B [Counter_Instance_B]
-            direction TB
-            CB_logic[configurable_counter 核心邏輯<br/>- 獨立 B 區間運算<br/>- 獨立 B 方向切換]
-        end
-    end
-
-    %% 連線：全域訊號分配
-    clk ---> Counter_A
-    clk ---> Counter_B
-    rst ---> Counter_A
-    rst ---> Counter_B
-
-    %% 連線：Counter A 獨立控制
-    en_A[en_A 致能] ---> Counter_A
-    up_A[up_A 方向] ---> Counter_A
-    low_A[low_A 下限] ---> Counter_A
-    high_A[high_A 上限] ---> Counter_A
-    Counter_A ---> out_A([out_A 4-bit 輸出])
-
-    %% 連線：Counter B 獨立控制
-    en_B[en_B 致能] ---> Counter_B
-    up_B[up_B 方向] ---> Counter_B
-    low_B[low_B 下限] ---> Counter_B
-    high_B[high_B 上限] ---> Counter_B
-    Counter_B ---> out_B([out_B 4-bit 輸出])
-
-```
+## Project 2 Breakdown
+![Project2_Breakdown](./project2_diagram/Breakdown.drawio(1).png)
 
 ---
 
