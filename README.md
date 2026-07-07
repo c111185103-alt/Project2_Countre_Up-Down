@@ -8,7 +8,7 @@
 ---
 
 ## Project 2 Breakdown
-![Project2_Breakdown](./project2_diagram/Breakdown.drawio(1).png)
+![Project2_Breakdown](./Project2_diagram/Breakdown.drawio.png)
 
 ---
 
