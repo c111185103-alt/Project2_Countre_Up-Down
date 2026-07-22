@@ -53,7 +53,7 @@
 
 ---
 
-## 5. 模擬環境與運行指引 (How to Run)
+## 5. 模擬環境與運行指示 (How to Run)
 
 1. 將 `configurable_counter.vhd` 與 `dual_counter_top.vhd` 檔案加入至 Xilinx Vivado 專案的 **Design Sources** 中。
 2. 將 `tb_dual_counter.vhd` 加入至 **Simulation Sources** 中。
