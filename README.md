@@ -53,29 +53,7 @@
 
 ---
 
-## 5. 繞線後時序延遲分析 (Post-Routing Timing Analysis)
-
-本專案除了進行基本的行為功能模擬外，進一步通過了 Vivado 的 **Post-Implementation Timing Simulation（實體佈線後時序模擬）**，以驗證電路在實際 FPGA 晶片硬體路徑上的真實表現。
-
-### 功能模擬與時序模擬之對比
-
-透過模擬波形比對，可以清楚觀察到理想硬體與真實硬體之間的關鍵差異：
-
-| 評比項目 | Behavioral Simulation (功能模擬) | Post-Implementation Timing (繞線後時序模擬) |
-| :--- | :--- | :--- |
-| **延遲模型** | **零延遲 (Zero Delay)**<br>訊號變化與時脈正緣完全同步。 | **真實延遲 (Realistic Delay)**<br>包含邏輯閘延遲（Gate Delay）與連線延遲（Routing Delay）。 |
-| **訊號觸發** | 當 `clk` 升起時，輸出值（`out_A`, `out_B`）在同一時間點瞬間完成切換（如 140.000ns）。 | 當 `clk` 升起後，輸出值需要經過一段傳播時間（Propagation Delay）才會完成轉變。 |
-| **初始不確定態** | 模擬剛開始時，所有暫存器直接進入乾淨的初始值。 | 在重置訊號（`rst`）尚未穩定傳播、硬體尚未就緒前，輸出端會短暫出現**紅色未知狀態（X 態）**。 |
-
-### 真實硬體延遲觀測點
-
-在繞線後的時序波形圖中（例如游標鎖定的 **264.600ns** 時間點）：
-
-**傳播延遲顯現**：當前級時脈正緣（Rising Edge）升起後，輸出訊號 `out_A` 與 `out_B` 並非瞬間改變，而是存在微小的時間差（$T_{co}$，Clock-to-Output Delay）。這是因為訊號必須通過 FPGA 內部的查找表（LUT）與實際的金屬走線（Routing Net）。
-
----
-
-## 6. 模擬環境與運行指引 (How to Run)
+## 5. 模擬環境與運行指引 (How to Run)
 
 1. 將 `configurable_counter.vhd` 與 `dual_counter_top.vhd` 檔案加入至 Xilinx Vivado 專案的 **Design Sources** 中。
 2. 將 `tb_dual_counter.vhd` 加入至 **Simulation Sources** 中。
