@@ -1,7 +1,7 @@
 # Project 2: Dual Configurable Counters (雙獨立可配置計數器系統)
 
-## 項目簡介 (Project Description)
-本項目為 FPGA 數位電路設計之 **Project 2：設計兩個完全獨立且可動態配置的計數器系統**。
+## 簡介 (Project Description)
+本專題為 FPGA 數位電路設計之 **Project 2：設計兩個完全獨立且可動態配置的計數器系統**。
 
 系統由一個頂層連接模組（Top Module）架接兩個相同架構的子模組計數器（Counter A & B）。這兩個計數器具備極高的硬體獨立性與並行處理能力，允許使用者透過外部輸入訊號，在不重新編譯電路且互不干擾的前提下，各別即時變更計數器 A 與 B 的計數範圍（上下限）、計數方向（上數/下數）以及啟動/暫停狀態。
 
@@ -9,7 +9,7 @@
 
 ## 1. 系統架構與模組階層 (System Architecture)
 
-系統採用結構化設計（Structural Modeling），將功能切分為頂層控制與底層執行單元。以下為本系統的模組樹狀階層圖：
+系統採用結構化設計（Structural Modeling），將功能切分為頂層控制與子模組。以下為本系統的模組樹狀階層圖：
 
 ### 模組階層樹狀圖 (Module Hierarchy)
 ![Project 2 Breakdown](./Project2_diagram/Breakdown.drawio.png)
